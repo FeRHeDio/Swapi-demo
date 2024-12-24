@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    let session = URLSession.shared
+    
     var body: some View {
         TabView {
-            CharactersView()
+            CharactersView(charactersViewModel: CharactersViewModel(api: API(session: session)))
                 .tabItem {
                     Label(
                         title: { Text("Characters") },

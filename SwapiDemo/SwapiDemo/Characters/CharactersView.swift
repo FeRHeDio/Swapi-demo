@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct CharactersView: View {
+    let charactersViewModel: CharactersViewModel
+    
+    init(charactersViewModel: CharactersViewModel) {
+        self.charactersViewModel = charactersViewModel
+    }
+    
     var body: some View {
-        VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            Text("This is the CharactersView")
+        ScrollView {
+            VStack {
+                ForEach(charactersViewModel.peopleList, id: \.uid) {
+                    Text($0.name)
+                }
+            }
+        }
+        .task {
+            await getData()
         }
     }
+    
+    private func getData() async {
+        await charactersViewModel.getData()
+    }
 }
-
-#Preview {
-    CharactersView()
-}
+//
+//#Preview {
+//    CharactersView(charactersViewModel: CharactersViewModel(api: API()))
+//}
