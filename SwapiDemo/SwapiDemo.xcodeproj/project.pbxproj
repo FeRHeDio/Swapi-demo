@@ -17,6 +17,8 @@
 		76C942E82D19942A0068560E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 76C942E72D19942A0068560E /* README.md */; };
 		76C942EB2D19A3390068560E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C942EA2D19A3390068560E /* API.swift */; };
 		76D38D0E2D1B2D7700B39099 /* CharactersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D38D0D2D1B2D7700B39099 /* CharactersView.swift */; };
+		76D38D112D1B315F00B39099 /* CharactersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D38D102D1B315F00B39099 /* CharactersViewModel.swift */; };
+		76E08EC62D1B32F90084C0F2 /* PeopleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E08EC52D1B32F90084C0F2 /* PeopleModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		76C942E72D19942A0068560E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		76C942EA2D19A3390068560E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		76D38D0D2D1B2D7700B39099 /* CharactersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersView.swift; sourceTree = "<group>"; };
+		76D38D102D1B315F00B39099 /* CharactersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModel.swift; sourceTree = "<group>"; };
+		76E08EC52D1B32F90084C0F2 /* PeopleModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				76D38D0D2D1B2D7700B39099 /* CharactersView.swift */,
+				76D38D102D1B315F00B39099 /* CharactersViewModel.swift */,
+				76E08EC52D1B32F90084C0F2 /* PeopleModels.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -285,8 +291,10 @@
 			files = (
 				76C942C02D198CA90068560E /* ContentView.swift in Sources */,
 				76C942EB2D19A3390068560E /* API.swift in Sources */,
+				76E08EC62D1B32F90084C0F2 /* PeopleModels.swift in Sources */,
 				76D38D0E2D1B2D7700B39099 /* CharactersView.swift in Sources */,
 				76C942BE2D198CA90068560E /* SwapiDemoApp.swift in Sources */,
+				76D38D112D1B315F00B39099 /* CharactersViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
