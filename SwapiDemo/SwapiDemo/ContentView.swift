@@ -49,14 +49,6 @@ struct ContentView: View {
                         icon: { Image(systemName: "car.rear.road.lane.dashed") }
                     )
                 }
-            
-            Text("Starships")
-                .tabItem {
-                    Label(
-                        title: { Text("Starships") },
-                        icon: { Image(systemName: "airplane") }
-                    )
-                }
         }
     }
 }
