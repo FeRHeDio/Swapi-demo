@@ -16,25 +16,28 @@ struct CharactersView: View {
     
     var body: some View {
         NavigationStack {
-            switch charactersViewModel.state {
-            case .loading:
-                ProgressView()
-            case .error:
-                Text("An error ocurred")
-            case .loaded(let characters):
-                ScrollView {
-                    VStack {
-                        ForEach(characters, id: \.uid) {
-                            Text($0.name)
+            Group {
+                switch charactersViewModel.state {
+                case .loading:
+                    ProgressView()
+                case .error:
+                    Text("An error ocurred")
+                case .loaded(let characters):
+                    ScrollView {
+                        VStack {
+                            ForEach(characters, id: \.uid) {
+                                Text($0.name)
+                            }
                         }
                     }
                 }
             }
+            .navigationTitle("Characters")
         }
         .task {
             await charactersViewModel.getData()
         }
-        .navigationTitle("Characters")
+        
     }
 }
 //
