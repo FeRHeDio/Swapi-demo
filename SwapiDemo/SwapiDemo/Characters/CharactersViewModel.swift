@@ -9,19 +9,27 @@ import Foundation
 
 @Observable
 class CharactersViewModel {
+    enum LoadingState {
+        case loading
+        case loaded(characters: [People])
+        case error
+    }
+    
     var peopleList = [People]()
     let api: API
-
+    var state = LoadingState.loading
+    
     init(peopleList: [People] = [People](), api: API) {
         self.peopleList = peopleList
         self.api = api
     }
     
     func getData() async {
+        state = .loading
         do {
-           peopleList = try await api.getPeople()
-        } catch let error {
-            print("error getting people: \(error.localizedDescription)")
+           state = .loaded(characters: try await api.getPeople())
+        } catch {
+            state = .error
         }
     }
 }
