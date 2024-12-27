@@ -30,7 +30,7 @@ struct CharactersView: View {
                             }
                         }
                     }
-                    .padding()
+                    .padding(.horizontal, 16)
                 }
             }
             .navigationTitle("Characters")
