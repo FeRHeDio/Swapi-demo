@@ -27,30 +27,6 @@ struct ContentView: View {
                         icon: { Image(systemName: "popcorn") }
                     )
                 }
-            
-            Text("Planets")
-                .tabItem {
-                    Label(
-                        title: { Text("Planets") },
-                        icon: { Image(systemName: "network") }
-                    )
-                }
-            
-            Text("Species")
-                .tabItem {
-                    Label(
-                        title: { Text("Species") },
-                        icon: { Image(systemName: "graduationcap.fill") }
-                    )
-                }
-            
-            Text("Vehicles")
-                .tabItem {
-                    Label(
-                        title: { Text("Vehicles") },
-                        icon: { Image(systemName: "car.rear.road.lane.dashed") }
-                    )
-                }
         }
     }
 }
