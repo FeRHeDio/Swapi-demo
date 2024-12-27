@@ -25,8 +25,8 @@ struct CharactersView: View {
                 case .loaded(let characters):
                     ScrollView {
                         VStack {
-                            ForEach(characters, id: \.uid) {
-                                Text($0.name)
+                            ForEach(characters, id: \.uid) { chad in
+                                CharacterView(character: chad)
                             }
                         }
                     }
@@ -37,10 +37,14 @@ struct CharactersView: View {
         .task {
             await charactersViewModel.getData()
         }
-        
     }
 }
-//
-//#Preview {
-//    CharactersView(charactersViewModel: CharactersViewModel(api: API()))
-//}
+
+struct CharacterView: View {
+    let character: People
+    
+    var body: some View {
+        Text(character.name)
+            .font(.headline).bold()
+    }
+}
