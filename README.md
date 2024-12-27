@@ -41,3 +41,11 @@ This project is designed as a showcase of good design principles and modern Swif
 - Open the project in Xcode.
 
 - Select a simulator and run the app.
+
+## Future Enhancements (WIP)
+
+- Unit Tests
+- Pagination
+- More views
+- Images
+- Persistence
