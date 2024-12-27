@@ -42,3 +42,11 @@ struct CharactersView: View {
         }
     }
 }
+
+#Preview {
+    CharactersView(
+        charactersViewModel: CharactersViewModel(
+            useMockData: true
+        )
+    )
+}

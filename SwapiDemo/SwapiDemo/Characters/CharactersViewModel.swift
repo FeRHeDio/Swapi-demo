@@ -16,20 +16,28 @@ class CharactersViewModel {
     }
     
     var peopleList = [People]()
-    let api: API
+    let api: API?
     var state = LoadingState.loading
+    var useMockData: Bool
     
-    init(peopleList: [People] = [People](), api: API) {
+    init(peopleList: [People] = [People](), api: API? = nil, useMockData: Bool = false) {
         self.peopleList = peopleList
         self.api = api
+        self.useMockData = useMockData
     }
     
     func getData() async {
-        state = .loading
-        do {
-           state = .loaded(characters: try await api.getPeople())
-        } catch {
-            state = .error
+        if useMockData {
+            state = .loaded(characters: People.mockData())
+        } else {
+            state = .loading
+            do {
+                if let api {
+                    state = .loaded(characters: try await api.getPeople())
+                }
+            } catch {
+                state = .error
+            }
         }
     }
 }
