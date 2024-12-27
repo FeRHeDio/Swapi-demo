@@ -42,10 +42,10 @@ This project is designed as a showcase of good design principles and modern Swif
 
 - Select a simulator and run the app.
 
-## Future Enhancements (WIP)
+## Future Enhancements
 
 - Unit Tests
-- Pagination
+- Pagination (WIP)
 - More views
 - Images
 - Persistence

@@ -1,5 +1,5 @@
 //
-//  PeopleModels.swift
+//  PeopleModel.swift
 //  SwapiDemo
 //
 //  Created by Fernando Putallaz on 24/12/2024.
