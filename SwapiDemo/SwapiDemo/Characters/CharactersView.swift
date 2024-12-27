@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CharactersView: View {
     let charactersViewModel: CharactersViewModel
+    @State private var selectedCharacter: People? = nil
     
     init(charactersViewModel: CharactersViewModel) {
         self.charactersViewModel = charactersViewModel
@@ -25,13 +26,19 @@ struct CharactersView: View {
                 case .loaded(let characters):
                     ScrollView {
                         VStack {
-                            ForEach(characters, id: \.uid) { chad in
+                            ForEach(characters) { chad in
                                 CharacterView(character: chad)
+                                    .onTapGesture {
+                                        selectedCharacter = chad
+                                    }
                             }
                         }
                     }
                 }
             }
+            .sheet(item: $selectedCharacter, content: { chad in
+                CharacterDetailsView(character: chad)
+            })
             .navigationTitle("Characters")
         }
         .task {

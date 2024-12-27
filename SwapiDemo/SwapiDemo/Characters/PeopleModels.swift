@@ -21,7 +21,8 @@ struct PeopleResponse: Codable {
     }
 }
 
-struct People: Codable {
+struct People: Codable, Identifiable {
+    var id: String { uid }
     let uid: String
     let name: String
     let url: String
