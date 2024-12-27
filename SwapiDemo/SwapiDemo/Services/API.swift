@@ -18,7 +18,6 @@ class API {
     
     func getPeople() async throws -> [People] {
         do {
-            
             guard let url = URL(string: baseURL) else {
                 throw URLError(.badURL)
             }
