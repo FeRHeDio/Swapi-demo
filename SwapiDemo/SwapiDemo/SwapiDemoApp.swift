@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct SwapiDemoApp: App {
+    let api: API
+    let charactersViewModel: CharactersViewModel
+    
+    init() {
+        let session = URLSession.shared
+        self.api = API(session: session)
+        self.charactersViewModel = CharactersViewModel(api: api)
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(charactersViewModel)
         }
     }
 }

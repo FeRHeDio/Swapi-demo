@@ -12,7 +12,7 @@ class API {
     
     let baseURL = "https://swapi.tech/api/people"
     
-    init(session: URLSession) {
+    init(session: URLSession = .shared) {
         self.session = session
     }
     

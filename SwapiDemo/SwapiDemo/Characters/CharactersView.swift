@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct CharactersView: View {
-    let charactersViewModel: CharactersViewModel
+    @Environment(CharactersViewModel.self) private var charactersViewModel: CharactersViewModel
     @State private var selectedCharacter: People? = nil
-    
-    init(charactersViewModel: CharactersViewModel) {
-        self.charactersViewModel = charactersViewModel
-    }
     
     var body: some View {
         NavigationStack {
@@ -36,10 +32,10 @@ struct CharactersView: View {
                     }
                 }
             }
+            .navigationTitle("Characters")
             .sheet(item: $selectedCharacter, content: { chad in
                 CharacterDetailsView(character: chad)
             })
-            .navigationTitle("Characters")
         }
         .task {
             await charactersViewModel.getData()
