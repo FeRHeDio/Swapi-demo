@@ -16,11 +16,3 @@ struct CharacterView: View {
             .bold()
     }
 }
-
-struct CharacterDetailsView: View {
-    let character: People
-    
-    var body: some View {
-        Text("Hi, my name is: \(character.name)")
-    }
-}
