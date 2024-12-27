@@ -20,8 +20,7 @@ struct SwapiDemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(charactersViewModel)
+            ContentView(charactersViewModel: charactersViewModel)
         }
     }
 }

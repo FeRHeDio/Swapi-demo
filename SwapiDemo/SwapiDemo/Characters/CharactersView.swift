@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CharactersView: View {
-    @Environment(CharactersViewModel.self) private var charactersViewModel: CharactersViewModel
+    let charactersViewModel: CharactersViewModel
     @State private var selectedCharacter: People? = nil
     
     var body: some View {

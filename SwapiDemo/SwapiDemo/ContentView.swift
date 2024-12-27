@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    let charactersViewModel: CharactersViewModel
+    
     var body: some View {
         TabView {
-            CharactersView()
+            CharactersView(charactersViewModel: charactersViewModel)
                 .tabItem {
                     Label(
                         title: { Text("Characters") },
@@ -27,8 +29,4 @@ struct ContentView: View {
                 }
         }
     }
-}
-
-#Preview {
-    ContentView()
 }
