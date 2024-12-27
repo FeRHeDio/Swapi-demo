@@ -11,10 +11,8 @@ import XCTest
 final class SwapiDemoTests: XCTestCase {
     func test_API_getPeopleSucceed() async throws {
         let sut = makeSUT()
-        let url = "https://swapi.tech/api/people"
-        
         let response = HTTPURLResponse(
-            url: URL(string: url)!,
+            url: URL(string: sut.baseURL)!,
             statusCode: 200,
             httpVersion: nil,
             headerFields: nil
@@ -27,7 +25,6 @@ final class SwapiDemoTests: XCTestCase {
         let peopleList = try await sut.getPeople()
         
         XCTAssertEqual(peopleList.count, 2, "Expected count 2, received: \(peopleList.count)")
-        
     }
     
     // MARK: - Helpers
@@ -73,7 +70,6 @@ private class URLSessionMock: URLProtocol {
     }
     
     override func startLoading() {
-        print("Request intercepted: \(request.url?.absoluteString ?? "Unknown URL")")
         if let (data, response, error) = URLSessionMock.mockResponse {
             if let data = data {
                 client?.urlProtocol(self, didLoad: data)
@@ -84,7 +80,6 @@ private class URLSessionMock: URLProtocol {
             if let error = error {
                 client?.urlProtocol(self, didFailWithError: error)
             } else {
-                print("No mock response set!")
                 client?.urlProtocolDidFinishLoading(self)
             }
         }
