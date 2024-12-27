@@ -20,7 +20,7 @@ struct CharactersView: View {
                 case .error:
                     Text("An error ocurred")
                 case .loaded(let characters):
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         VStack {
                             ForEach(characters) { chad in
                                 CharacterView(character: chad)
@@ -30,6 +30,7 @@ struct CharactersView: View {
                             }
                         }
                     }
+                    .padding()
                 }
             }
             .navigationTitle("Characters")

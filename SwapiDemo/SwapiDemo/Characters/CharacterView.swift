@@ -11,8 +11,33 @@ struct CharacterView: View {
     let character: People
     
     var body: some View {
-        Text(character.name)
-            .font(.headline)
-            .bold()
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(character.name)
+                    .font(.headline)
+                    .bold()
+                Text(character.url)
+                    .font(.footnote)
+            }
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+        }
+        .padding()
+        .overlay {
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(lineWidth: 1)
+                .foregroundColor(.gray)
+        }
     }
+}
+
+#Preview {
+    CharacterView(
+        character: People(
+            uid: "1",
+            name: "Luke Skywalker",
+            url: "www.something"
+        )
+    )
 }
