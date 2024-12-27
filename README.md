@@ -41,19 +41,3 @@ This project is designed as a showcase of good design principles and modern Swif
 - Open the project in Xcode.
 
 - Select a simulator and run the app.
-
-## Project Structure
-SwapiDemoApp
-├── Models
-│   ├── People.swift
-│   ├── PeopleResponse.swift
-├── ViewModels
-│   ├── CharactersViewModel.swift
-├── Views
-│   ├── CharactersView.swift
-│   ├── CharacterDetailsView.swift
-│   ├── CharacterView.swift
-├── API
-│   ├── API.swift
-└── App
-    ├── SwapiDemoApp.swift
