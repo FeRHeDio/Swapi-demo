@@ -1,5 +1,5 @@
 # Swapi-demo
-A SwiftUI application that demonstrates clean architecture, dependency injection, and async/await patterns to fetch and display character data from the Star Wars API (swapi.tech). 
+A SwiftUI application that demonstrates `Clean architecture`, `Dependency injection`, and `async/await` patterns to fetch and display character data from the Star Wars API (swapi.tech). 
 This project is designed as a showcase of good design principles and modern Swift development techniques.
 
 ## Key Features
