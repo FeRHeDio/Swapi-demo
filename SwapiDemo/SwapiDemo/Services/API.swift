@@ -10,15 +10,21 @@ import Foundation
 class API {
     private var session: URLSession
     
-    let baseURL = "https://swapi.tech/api/people"
+    private var baseURL: String
     
-    init(session: URLSession = .shared) {
+    init(
+        session: URLSession = .shared,
+        baseURL: String = "https://swapi.tech/api/people"
+    ) {
         self.session = session
+        self.baseURL = baseURL
     }
     
     func getPeople() async throws -> [People] {
         do {
+                // FIXME: - this should fail with a wrong url.
             guard let url = URL(string: baseURL) else {
+                
                 throw URLError(.badURL)
             }
             

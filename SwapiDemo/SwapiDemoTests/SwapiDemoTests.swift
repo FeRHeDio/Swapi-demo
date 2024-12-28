@@ -11,8 +11,9 @@ import XCTest
 final class SwapiDemoTests: XCTestCase {
     func test_API_getPeopleSucceed() async throws {
         let sut = makeSUT()
+        let url = "https://swapi.tech/api/people"
         let response = HTTPURLResponse(
-            url: URL(string: sut.baseURL)!,
+            url: URL(string: url)!,
             statusCode: 200,
             httpVersion: nil,
             headerFields: nil
@@ -27,14 +28,27 @@ final class SwapiDemoTests: XCTestCase {
         XCTAssertEqual(peopleList.count, 2, "Expected count 2, received: \(peopleList.count)")
     }
     
+    func test_API_returnsBadURLError() async {
+        let wrongURL = "someBadURL"
+        let sut = makeSUT(url: wrongURL)
+        
+        do {
+            _ = try await sut.getPeople()
+            assertionFailure("Shouldn't succeed")
+        } catch {
+            XCTAssertEqual(error as? URLError, URLError(.badURL))
+        }
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT() -> API {
+    private func makeSUT(url: String = "https://swapi.tech/api/people") -> API {
+        
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [URLSessionMock.self]
         let mockSession = URLSession(configuration: config)
         
-        return API(session: mockSession)
+        return API(session: mockSession, baseURL: url)
     }
     
     private func makePeopleReponseMock() -> PeopleResponse {
