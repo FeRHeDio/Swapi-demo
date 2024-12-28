@@ -22,9 +22,7 @@ class API {
     
     func getPeople() async throws -> [People] {
         do {
-                // FIXME: - this should fail with a wrong url.
-            guard let url = URL(string: baseURL) else {
-                
+            guard let url = URL(string: baseURL), url.scheme != nil, url.host != nil else {
                 throw URLError(.badURL)
             }
             
