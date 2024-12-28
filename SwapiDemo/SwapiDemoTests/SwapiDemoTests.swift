@@ -40,6 +40,26 @@ final class SwapiDemoTests: XCTestCase {
         }
     }
     
+    func test_API_returnsResponseError() async {
+        let sut = makeSUT()
+        let url = "https://swapi.tech/api/people"
+        
+        let response = HTTPURLResponse(
+            url: URL(string: url)!,
+            statusCode: 300,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        URLSessionMock.mockResponse = (nil, response, nil)
+        
+        do {
+            _ = try await sut.getPeople()
+        } catch {
+            XCTAssertEqual(error as? URLError, URLError(.badServerResponse))
+        }
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(url: String = "https://swapi.tech/api/people") -> API {
