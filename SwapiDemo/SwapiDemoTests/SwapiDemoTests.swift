@@ -83,7 +83,6 @@ final class SwapiDemoTests: XCTestCase {
     // MARK: - Helpers
     
     private func makeSUT(url: String = "https://swapi.tech/api/people") -> API {
-        
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [URLSessionMock.self]
         let mockSession = URLSession(configuration: config)
@@ -137,7 +136,6 @@ private class URLSessionMock: URLProtocol {
                 client?.urlProtocolDidFinishLoading(self)
             }
         }
-        
     }
     
     override func stopLoading() {}

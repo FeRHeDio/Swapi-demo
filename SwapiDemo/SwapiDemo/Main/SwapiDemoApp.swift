@@ -14,7 +14,7 @@ struct SwapiDemoApp: App {
     
     init() {
         let session = URLSession.shared
-        self.api = API(session: session)
+        self.api = API(session: session, baseURL: <#String#>)
         self.charactersViewModel = CharactersViewModel(api: api)
     }
     

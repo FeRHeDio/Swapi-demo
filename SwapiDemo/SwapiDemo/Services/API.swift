@@ -9,7 +9,6 @@ import Foundation
 
 class API {
     private var session: URLSession
-    
     private var baseURL: String
     
     init(
@@ -29,7 +28,6 @@ class API {
             let (data, response) = try await session.data(from: url)
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                
                 throw URLError(.badServerResponse )
             }
             
