@@ -29,13 +29,6 @@
 			remoteGlobalIDString = 76C942B92D198CA90068560E;
 			remoteInfo = SwapiDemo;
 		};
-		76C942D52D198CAA0068560E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76C942B22D198CA90068560E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76C942B92D198CA90068560E;
-			remoteInfo = SwapiDemo;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +44,6 @@
 		76C942C42D198CAA0068560E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		76C942CA2D198CAA0068560E /* SwapiDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapiDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C942CE2D198CAA0068560E /* SwapiDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapiDemoTests.swift; sourceTree = "<group>"; };
-		76C942D42D198CAA0068560E /* SwapiDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapiDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C942E72D19942A0068560E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		76C942EA2D19A3390068560E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,13 +57,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		76C942C72D198CAA0068560E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76C942D12D198CAA0068560E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -130,7 +115,6 @@
 				76C942E72D19942A0068560E /* README.md */,
 				76C942BC2D198CA90068560E /* SwapiDemo */,
 				76C942CD2D198CAA0068560E /* SwapiDemoTests */,
-				76C942D72D198CAA0068560E /* SwapiDemoUITests */,
 				76C942BB2D198CA90068560E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -140,7 +124,6 @@
 			children = (
 				76C942BA2D198CA90068560E /* SwapiDemo.app */,
 				76C942CA2D198CAA0068560E /* SwapiDemoTests.xctest */,
-				76C942D42D198CAA0068560E /* SwapiDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,13 +156,6 @@
 				76C942CE2D198CAA0068560E /* SwapiDemoTests.swift */,
 			);
 			path = SwapiDemoTests;
-			sourceTree = "<group>";
-		};
-		76C942D72D198CAA0068560E /* SwapiDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SwapiDemoUITests;
 			sourceTree = "<group>";
 		};
 		76C942E92D19A30F0068560E /* Services */ = {
@@ -228,24 +204,6 @@
 			productReference = 76C942CA2D198CAA0068560E /* SwapiDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		76C942D32D198CAA0068560E /* SwapiDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 76C942E42D198CAA0068560E /* Build configuration list for PBXNativeTarget "SwapiDemoUITests" */;
-			buildPhases = (
-				76C942D02D198CAA0068560E /* Sources */,
-				76C942D12D198CAA0068560E /* Frameworks */,
-				76C942D22D198CAA0068560E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				76C942D62D198CAA0068560E /* PBXTargetDependency */,
-			);
-			name = SwapiDemoUITests;
-			productName = SwapiDemoUITests;
-			productReference = 76C942D42D198CAA0068560E /* SwapiDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -260,10 +218,6 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					76C942C92D198CAA0068560E = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 76C942B92D198CA90068560E;
-					};
-					76C942D32D198CAA0068560E = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 76C942B92D198CA90068560E;
 					};
@@ -284,7 +238,6 @@
 			targets = (
 				76C942B92D198CA90068560E /* SwapiDemo */,
 				76C942C92D198CAA0068560E /* SwapiDemoTests */,
-				76C942D32D198CAA0068560E /* SwapiDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,13 +254,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		76C942C82D198CAA0068560E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76C942D22D198CAA0068560E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -340,13 +286,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76C942D02D198CAA0068560E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -354,11 +293,6 @@
 			isa = PBXTargetDependency;
 			target = 76C942B92D198CA90068560E /* SwapiDemo */;
 			targetProxy = 76C942CB2D198CAA0068560E /* PBXContainerItemProxy */;
-		};
-		76C942D62D198CAA0068560E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 76C942B92D198CA90068560E /* SwapiDemo */;
-			targetProxy = 76C942D52D198CAA0068560E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -580,42 +514,6 @@
 			};
 			name = Release;
 		};
-		76C942E52D198CAA0068560E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F342975UV4;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ferhedio.SwapiDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwapiDemo;
-			};
-			name = Debug;
-		};
-		76C942E62D198CAA0068560E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F342975UV4;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ferhedio.SwapiDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwapiDemo;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -642,15 +540,6 @@
 			buildConfigurations = (
 				76C942E22D198CAA0068560E /* Debug */,
 				76C942E32D198CAA0068560E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		76C942E42D198CAA0068560E /* Build configuration list for PBXNativeTarget "SwapiDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				76C942E52D198CAA0068560E /* Debug */,
-				76C942E62D198CAA0068560E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
