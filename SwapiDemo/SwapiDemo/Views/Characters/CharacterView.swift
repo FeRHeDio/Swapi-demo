@@ -31,9 +31,22 @@ struct CharacterView: View {
                 .foregroundColor(.gray)
             HStack {
                 Spacer()
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .scaledToFit()
+                if let imageURL = character.imageURL {
+                    VStack {
+                        AsyncImage(url: URL(string: imageURL)) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 80, alignment: .center)
+                        }
+                    }
+                } else {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .scaledToFit()
+                }
             }
             .padding(.trailing, 24)
             .opacity(0.3)
@@ -47,7 +60,7 @@ struct CharacterView: View {
             uid: "1",
             name: "Luke Skywalker",
             url: "www.something",
-            imageURL: nil
+            imageURL: "https://images4.fanpop.com/image/photos/19200000/Padm-Naberrie-Amidala-Skywalker-padme-naberrie-amidala-skywalker-19259192-1247-1470.jpg"
         )
     )
 }
