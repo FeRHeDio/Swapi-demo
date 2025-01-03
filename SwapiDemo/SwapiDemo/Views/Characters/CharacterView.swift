@@ -23,11 +23,20 @@ struct CharacterView: View {
             
             Image(systemName: "chevron.right")
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .padding(.vertical, 32)
         .overlay {
             RoundedRectangle(cornerRadius: 24)
                 .stroke(lineWidth: 1)
                 .foregroundColor(.gray)
+            HStack {
+                Spacer()
+                Image(systemName: "person.fill")
+                    .resizable()
+                    .scaledToFit()
+            }
+            .padding(.trailing, 24)
+            .opacity(0.3)
         }
     }
 }

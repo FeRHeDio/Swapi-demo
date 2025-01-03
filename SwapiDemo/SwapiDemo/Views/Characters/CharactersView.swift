@@ -27,6 +27,7 @@ struct CharactersView: View {
                                     .onTapGesture {
                                         selectedCharacter = chad
                                     }
+                                    .padding(.vertical, 8)
                             }
                         }
                     }
