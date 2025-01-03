@@ -46,7 +46,8 @@ struct CharacterView: View {
         character: People(
             uid: "1",
             name: "Luke Skywalker",
-            url: "www.something"
+            url: "www.something",
+            imageURL: nil
         )
     )
 }
