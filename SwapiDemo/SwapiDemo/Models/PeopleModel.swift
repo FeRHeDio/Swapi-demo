@@ -27,6 +27,7 @@ struct People: Codable, Identifiable {
     let name: String
     let url: String
     let imageURL: String?
+    var imageName: String { uid }
 }
 
 extension People {

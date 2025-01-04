@@ -31,22 +31,10 @@ struct CharacterView: View {
                 .foregroundColor(.gray)
             HStack {
                 Spacer()
-                if let imageURL = character.imageURL {
-                    VStack {
-                        AsyncImage(url: URL(string: imageURL)) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                        } placeholder: {
-                            ProgressView()
-                                .frame(width: 80, alignment: .center)
-                        }
-                    }
-                } else {
-                    Image(systemName: "person.fill")
-                        .resizable()
-                        .scaledToFit()
-                }
+                Image(character.imageName)
+                    .resizable()
+                    .scaledToFit()
+                
             }
             .padding(.trailing, 24)
             .opacity(0.3)
