@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct PeopleResponse: Codable {
     let message: String
@@ -26,7 +27,9 @@ struct People: Codable, Identifiable {
     let uid: String
     let name: String
     let url: String
-    var imageName: String { uid }
+    var imageName: String {
+        return UIImage(named: uid) != nil ? uid : "placeholder"
+    }
 }
 
 extension People {

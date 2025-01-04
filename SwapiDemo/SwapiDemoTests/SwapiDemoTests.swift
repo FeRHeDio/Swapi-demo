@@ -99,14 +99,12 @@ final class SwapiDemoTests: XCTestCase {
                 People(
                     uid: "1",
                     name: "Luke Skywalker",
-                    url: "https://swapi.tech/api/people/1",
-                    imageURL: nil
+                    url: "https://swapi.tech/api/people/1"
                 ),
                 People(
                     uid: "2",
                     name: "Darth Vader",
-                    url: "https://swapi.tech/api/people/2",
-                    imageURL: nil
+                    url: "https://swapi.tech/api/people/2"
                 ),
             ]
         )
