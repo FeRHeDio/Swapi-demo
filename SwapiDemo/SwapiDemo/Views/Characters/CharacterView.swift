@@ -34,7 +34,6 @@ struct CharacterView: View {
                 Image(character.imageName)
                     .resizable()
                     .scaledToFit()
-                
             }
             .padding(.trailing, 24)
             .opacity(0.3)
@@ -47,8 +46,7 @@ struct CharacterView: View {
         character: People(
             uid: "1",
             name: "Luke Skywalker",
-            url: "www.something",
-            imageURL: "https://images4.fanpop.com/image/photos/19200000/Padm-Naberrie-Amidala-Skywalker-padme-naberrie-amidala-skywalker-19259192-1247-1470.jpg"
+            url: "www.something"
         )
     )
 }
