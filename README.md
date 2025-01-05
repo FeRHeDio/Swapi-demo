@@ -27,9 +27,11 @@ This project is designed as a showcase of good design principles and modern Swif
 ### **SwiftUI Design**
 - Leverages modern SwiftUI features such as `NavigationStack`, `ScrollView`, and `ProgressView` to create a responsive and intuitive user interface.
 
-- Displays characters in a scrollable list with interactive elements, including a detail view shown via a sheet presentation.
+- Displays characters in a scrollable list with interactive elements, including a detail view shown via a sheet presentation (WIP)
 
-### **Error Handling**
+- Add the character image in the character list
+
+### **Error Handling** WIP
 - Gracefully handles errors during data fetching and updates the UI state accordingly.
 
 - Provides feedback to the user with clear error messages and fallback UI components.
