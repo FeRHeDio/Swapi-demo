@@ -10,7 +10,7 @@ import SwiftUI
 struct CharacterView: View {
     let character: People
     
-    var body: some View { 
+    var body: some View {
         ZStack(alignment: .bottom) {
             Image(character.imageName)
                 .resizable()
@@ -20,10 +20,12 @@ struct CharacterView: View {
             
             VStack(alignment: .leading) {
                 Text(character.name)
-                    .font(.headline)
-                    .bold()
-                Text(character.url)
                     .font(.caption)
+                    .bold()
+                
+                Text(character.url)
+                    .font(.caption2)
+                    .lineLimit(1)
             }
             .padding()
             .frame(width: 180, alignment: .leading)
@@ -39,7 +41,7 @@ struct CharacterView: View {
         character: People(
             uid: "1",
             name: "Luke Skywalker",
-            url: "www.something"
+            url: "https://www.swapi.tech/api/people/1"
         )
     )
 }
