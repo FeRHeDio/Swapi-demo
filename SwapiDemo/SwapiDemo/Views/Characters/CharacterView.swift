@@ -10,34 +10,27 @@ import SwiftUI
 struct CharacterView: View {
     let character: People
     
-    var body: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 8) {
+    var body: some View { 
+        ZStack(alignment: .bottom) {
+            Image(character.imageName)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(20)
+                .frame(width: 180)
+            
+            VStack(alignment: .leading) {
                 Text(character.name)
                     .font(.headline)
                     .bold()
                 Text(character.url)
-                    .font(.footnote)
+                    .font(.caption)
             }
-            Spacer()
-            
-            Image(systemName: "chevron.right")
+            .padding()
+            .frame(width: 180, alignment: .leading)
+            .background(.ultraThinMaterial)
+            .cornerRadius(20)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 32)
-        .overlay {
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(lineWidth: 1)
-                .foregroundColor(.gray)
-            HStack {
-                Spacer()
-                Image(character.imageName)
-                    .resizable()
-                    .scaledToFit()
-            }
-            .padding(.trailing, 24)
-            .opacity(0.3)
-        }
+        .shadow(radius: 3)
     }
 }
 
