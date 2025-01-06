@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharactersView: View {
     let charactersViewModel: CharactersViewModel
-    var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
+    var columns = [GridItem(.adaptive(minimum: 160), spacing: 10)]
     @State private var selectedCharacter: People? = nil
     
     var body: some View {
