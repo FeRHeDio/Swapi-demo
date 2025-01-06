@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CharactersView: View {
     let charactersViewModel: CharactersViewModel
+    var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
     @State private var selectedCharacter: People? = nil
     
     var body: some View {
@@ -21,7 +22,7 @@ struct CharactersView: View {
                     Text("An error ocurred")
                 case .loaded(let characters):
                     ScrollView(showsIndicators: false) {
-                        VStack {
+                        LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(characters) { chad in
                                 CharacterView(character: chad)
                                     .onTapGesture {
@@ -31,7 +32,7 @@ struct CharactersView: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 6)
                 }
             }
             .navigationTitle("Characters")
