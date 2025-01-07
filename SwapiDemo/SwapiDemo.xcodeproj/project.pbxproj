@@ -19,6 +19,7 @@
 		76C942CF2D198CAA0068560E /* SwapiDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C942CE2D198CAA0068560E /* SwapiDemoTests.swift */; };
 		76C942E82D19942A0068560E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 76C942E72D19942A0068560E /* README.md */; };
 		76C942EB2D19A3390068560E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C942EA2D19A3390068560E /* API.swift */; };
+		76CF6DC52D2D5BE500E64CE7 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CF6DC42D2D5BE500E64CE7 /* URLSessionMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		76C942CE2D198CAA0068560E /* SwapiDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapiDemoTests.swift; sourceTree = "<group>"; };
 		76C942E72D19942A0068560E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		76C942EA2D19A3390068560E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		76CF6DC42D2D5BE500E64CE7 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 		76C942CD2D198CAA0068560E /* SwapiDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				76CF6DC32D2D5BD000E64CE7 /* Helpers */,
 				76C942CE2D198CAA0068560E /* SwapiDemoTests.swift */,
 			);
 			path = SwapiDemoTests;
@@ -164,6 +167,14 @@
 				76C942EA2D19A3390068560E /* API.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		76CF6DC32D2D5BD000E64CE7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				76CF6DC42D2D5BE500E64CE7 /* URLSessionMock.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76CF6DC52D2D5BE500E64CE7 /* URLSessionMock.swift in Sources */,
 				76C942CF2D198CAA0068560E /* SwapiDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
