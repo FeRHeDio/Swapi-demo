@@ -22,10 +22,6 @@ struct CharacterView: View {
                 Text(character.name)
                     .font(.caption)
                     .bold()
-                
-                Text(character.url)
-                    .font(.caption2)
-                    .lineLimit(1)
             }
             .padding()
             .frame(width: 180, alignment: .leading)
