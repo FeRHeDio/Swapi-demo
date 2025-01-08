@@ -1,4 +1,4 @@
-# Star Wars API - SwiftUI Demo (
+# Star Wars API - SwiftUI Demo
 A SwiftUI application that demonstrates `Clean architecture`, `Dependency injection`, and `async/await` patterns to fetch and display character data from `The Star Wars API` [swapi.tech](swapi.tech). 
 
 ## About SWAPI - The Star Wars API
@@ -47,12 +47,12 @@ It starts showing a simple list of characters but I'll be adding more features a
 
 - Add the character image in the character list
 
-### **Error Handling** (WIP)
+### **Error Handling**
 - Gracefully handles errors during data fetching and updates the UI state accordingly.
 
 - Provides feedback to the user with clear error messages and fallback UI components.
 
-### **Unit Tests with Mocking** (WIP)
+### **Unit Tests with Mocking** 
 - Includes unit tests for the `API` class using a custom `URLSessionMock` to simulate network responses.
 - Validates the behavior of API methods, such as fetching data and handling errors.
 
