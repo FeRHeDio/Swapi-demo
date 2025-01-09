@@ -95,6 +95,7 @@ final class SwapiDemoTests: XCTestCase {
             message: "ok",
             records: 2,
             pages: 1,
+            next: nil,
             results: [
                 People(
                     uid: "1",

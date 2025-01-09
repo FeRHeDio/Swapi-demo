@@ -12,12 +12,14 @@ struct PeopleResponse: Codable {
     let message: String
     let records: Int
     let pages: Int
+    let next: String?
     let results: [People]
     
     enum CodingKeys: String, CodingKey {
         case message
         case records = "total_records"
         case pages = "total_pages"
+        case next
         case results
     }
 }

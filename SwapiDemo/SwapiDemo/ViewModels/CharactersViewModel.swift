@@ -19,6 +19,11 @@ class CharactersViewModel {
     let api: API?
     var state = LoadingState.loading
     var useMockData: Bool
+    var nextURL: String?
+    
+    var hasMorePages: Bool {
+        nextURL != nil
+    }
     
     init(peopleList: [People] = [People](), api: API? = nil, useMockData: Bool = false) {
         self.peopleList = peopleList

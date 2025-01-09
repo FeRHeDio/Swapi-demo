@@ -10,6 +10,7 @@ import Foundation
 class API {
     private var session: URLSession
     private var baseURL: String
+    var nextURL: String?
     
     init(
         session: URLSession = .shared,
@@ -20,8 +21,16 @@ class API {
     }
     
     func getPeople() async throws -> [People] {
+        var urlString = ""
+        
+        if let nextURL {
+            urlString = nextURL
+        } else {
+            urlString = baseURL
+        }
+        
         do {
-            guard let url = URL(string: baseURL), url.scheme != nil, url.host != nil else {
+            guard let url = URL(string: urlString), url.scheme != nil, url.host != nil else {
                 throw URLError(.badURL)
             }
             
@@ -36,6 +45,8 @@ class API {
             }
             
             let peopleResponse = try JSONDecoder().decode(PeopleResponse.self, from: data)
+            
+            nextURL = peopleResponse.next
             
             return peopleResponse.results
             
