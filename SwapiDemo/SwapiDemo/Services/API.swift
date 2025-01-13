@@ -55,3 +55,23 @@ class API {
         }
     }
 }
+
+extension API {
+    
+    func getPeopleFromURL(_ urlString: String) async throws -> PeopleResponse {
+        guard let url = URL(string: urlString) else { throw URLError(.badURL) }
+        
+        let (data, response) = try await session.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw URLError(.badServerResponse )
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        let peopleResponse = try JSONDecoder().decode(PeopleResponse.self, from: data)
+        
+        return peopleResponse
+    }
+}

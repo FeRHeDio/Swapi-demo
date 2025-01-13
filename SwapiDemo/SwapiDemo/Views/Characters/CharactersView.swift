@@ -20,11 +20,18 @@ struct CharactersView: View {
                     ProgressView()
                 case .error:
                     Text("An error ocurred")
-                case .loaded(let characters):
+                case .loaded:
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(characters) { chad in
+                            ForEach(charactersViewModel.peopleList) { chad in
                                 CharacterView(character: chad)
+                                    .onAppear {
+                                        if chad == charactersViewModel.peopleList.last, charactersViewModel.hasMorePages {
+                                            Task {
+                                                await charactersViewModel.fetchNextPage()
+                                            }
+                                        }
+                                    }
                                     .onTapGesture {
                                         selectedCharacter = chad
                                     }

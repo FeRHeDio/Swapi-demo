@@ -11,7 +11,7 @@ import Foundation
 class CharactersViewModel {
     enum LoadingState {
         case loading
-        case loaded(characters: [People])
+        case loaded
         case error
     }
     
@@ -33,16 +33,36 @@ class CharactersViewModel {
     
     func getData() async {
         if useMockData {
-            state = .loaded(characters: People.mockData())
+            peopleList = People.mockData()
+            state = .loaded
         } else {
             state = .loading
             do {
                 if let api {
-                    state = .loaded(characters: try await api.getPeople())
+                    peopleList = try await api.getPeople()
+                    nextURL = api.nextURL
+                    state = .loaded
                 }
             } catch {
                 state = .error
             }
+        }
+    }
+    
+    func fetchNextPage() async {
+        guard let nextPage = nextURL else  { return }
+        state = .loading
+        
+        do {
+            if let api {
+                let response = try await api.getPeopleFromURL(nextPage)
+                peopleList.append(contentsOf: response.results)
+                state = .loaded
+                
+                nextURL = response.next
+            }
+        } catch {
+            state = .error
         }
     }
 }
