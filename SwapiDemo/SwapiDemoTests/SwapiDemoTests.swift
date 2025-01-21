@@ -11,8 +11,8 @@ import XCTest
 
 final class SwapiDemoTests: XCTestCase {
     func test_API_getPeopleSucceed() async throws {
-        let sut = makeSUT()
         let url = "https://swapi.tech/api/people"
+        let sut = makeSUT(url: url)
         let response = HTTPURLResponse(
             url: URL(string: url)!,
             statusCode: 200,
@@ -29,7 +29,7 @@ final class SwapiDemoTests: XCTestCase {
         var peopleList = [People]()
         let exp = XCTestExpectation(description: "wait for it")
         
-        sut.getPeople()
+        sut.getPeople(from: url)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -47,19 +47,31 @@ final class SwapiDemoTests: XCTestCase {
         
         XCTAssertEqual(peopleList.count, 2, "Expected count 2, received: \(peopleList.count)")
     }
-//    
-//    func test_API_returnsBadURLError() async {
-//        let wrongURL = "someBadURL"
-//        let sut = makeSUT(url: wrongURL)
-//        
-//        do {
-//            _ = try await sut.getPeople()
-//            assertionFailure("Shouldn't succeed")
-//        } catch {
-//            XCTAssertEqual(error as? URLError, URLError(.badURL))
-//        }
-//    }
-//    
+    
+    func test_API_returnsBadURLError() async {
+        let wrongURL = "someBadURL"
+        let sut = makeSUT(url: wrongURL)
+        var cancellable = Set<AnyCancellable>()
+        
+        let exp = XCTestExpectation(description: "wait for it")
+        
+        sut.getPeople(from: wrongURL)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print("error: \(error)")
+                    XCTAssertEqual(error as? URLError, URLError(.badURL))
+                    exp.fulfill()
+                }
+            } receiveValue: { _ in exp.fulfill() }
+            
+            .store(in: &cancellable)
+
+        wait(for: [exp], timeout: 1.0)
+    }
+    
 //    func test_API_returnsBadResponseError() async {
 //        let sut = makeSUT()
 //        let url = "https://swapi.tech/api/people"
@@ -102,7 +114,7 @@ final class SwapiDemoTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(url: String = "https://swapi.tech/api/people") -> API {
+    private func makeSUT(url: String) -> API {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [URLSessionMock.self]
         let mockSession = URLSession(configuration: config)

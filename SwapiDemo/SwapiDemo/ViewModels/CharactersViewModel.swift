@@ -15,6 +15,9 @@ class CharactersViewModel {
         case loaded(characters: [People])
         case error
     }
+    
+    var nextPageURL: String?
+    var currentPageURL = "https://swapi.tech/api/people"
     var cancellable = Set<AnyCancellable>()
     var peopleList = [People]()
     let api: API?
@@ -29,8 +32,10 @@ class CharactersViewModel {
     }
     
     func getPeople() {
+        let url = nextPageURL ?? currentPageURL
+                
         if let api {
-            api.getPeople()
+            api.getPeople(from: url)
                 .sink(receiveCompletion: { completion in
                     switch completion {
                     case .finished:

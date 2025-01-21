@@ -10,18 +10,18 @@ import Foundation
 
 class API {
     private var session: URLSession
-    private var baseURL: String
+    private var baseURL: String?
     
     init(
         session: URLSession = .shared,
-        baseURL: String = "https://swapi.tech/api/people"
+        baseURL: String?
     ) {
         self.session = session
         self.baseURL = baseURL
     }
     
-    func getPeople() -> AnyPublisher<PeopleResponse, Error> {
-        guard let url = URL(string: baseURL) else {
+    func getPeople(from url: String) -> AnyPublisher<PeopleResponse, Error> {
+        guard let url = URL(string: url) else {
             return Fail(error: URLError(.badURL))
                 .eraseToAnyPublisher()
         }
