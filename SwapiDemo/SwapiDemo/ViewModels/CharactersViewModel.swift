@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @Observable
 class CharactersViewModel {
@@ -14,7 +15,7 @@ class CharactersViewModel {
         case loaded(characters: [People])
         case error
     }
-    
+    var cancellable = Set<AnyCancellable>()
     var peopleList = [People]()
     let api: API?
     var state = LoadingState.loading
@@ -24,6 +25,7 @@ class CharactersViewModel {
         self.peopleList = peopleList
         self.api = api
         self.useMockData = useMockData
+        getPeople()
     }
     
     func getData() async {
@@ -38,6 +40,24 @@ class CharactersViewModel {
             } catch {
                 state = .error
             }
+        }
+    }
+    
+    func getPeople() {
+        if let api {
+            api.getPeopleCombine()
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        print("finished")
+                    case .failure(let error):
+                        print("error: \(error)")
+                    }
+                }, receiveValue: { [weak self] val in
+                    self?.state = .loaded(characters: val.results)
+                    self?.peopleList = val.results
+                })
+                .store(in: &cancellable)
         }
     }
 }

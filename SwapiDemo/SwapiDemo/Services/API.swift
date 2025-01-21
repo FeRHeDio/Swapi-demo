@@ -6,6 +6,11 @@
 //
 
 import Foundation
+import Combine
+
+enum NetworkError: Error {
+    case responseError
+}
 
 class API {
     private var session: URLSession
@@ -43,4 +48,20 @@ class API {
             throw error
         }
     }
+    
+    func getPeopleCombine() -> AnyPublisher<PeopleResponse, Error> {
+        return URLSession.shared.dataTaskPublisher(for: URL(string: baseURL)!)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    throw NetworkError.responseError
+                }
+                
+                return data
+            }
+            .decode(type: PeopleResponse.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
 }

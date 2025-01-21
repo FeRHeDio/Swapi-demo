@@ -40,9 +40,6 @@ struct CharactersView: View {
                 CharacterDetailsView(character: chad)
             })
         }
-        .task {
-            await charactersViewModel.getData()
-        }
     }
 }
 
