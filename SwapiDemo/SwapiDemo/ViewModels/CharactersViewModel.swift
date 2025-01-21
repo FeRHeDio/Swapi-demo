@@ -28,34 +28,20 @@ class CharactersViewModel {
         getPeople()
     }
     
-    func getData() async {
-        if useMockData {
-            state = .loaded(characters: People.mockData())
-        } else {
-            state = .loading
-            do {
-                if let api {
-                    state = .loaded(characters: try await api.getPeople())
-                }
-            } catch {
-                state = .error
-            }
-        }
-    }
-    
     func getPeople() {
         if let api {
-            api.getPeopleCombine()
+            api.getPeople()
                 .sink(receiveCompletion: { completion in
                     switch completion {
                     case .finished:
                         print("finished")
-                    case .failure(let error):
-                        print("error: \(error)")
+                    case .failure(_):
+                        self.state = .error
                     }
                 }, receiveValue: { [weak self] val in
-                    self?.state = .loaded(characters: val.results)
-                    self?.peopleList = val.results
+                    guard let self else { return }
+                    
+                    self.state = .loaded(characters: val.results)
                 })
                 .store(in: &cancellable)
         }
