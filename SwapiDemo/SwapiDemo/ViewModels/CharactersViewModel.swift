@@ -32,23 +32,27 @@ class CharactersViewModel {
     }
     
     func getPeople() {
-        let url = nextPageURL ?? currentPageURL
-                
-        if let api {
-            api.getPeople(from: url)
-                .sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        print("finished")
-                    case .failure(_):
-                        self.state = .error
-                    }
-                }, receiveValue: { [weak self] val in
-                    guard let self else { return }
-                    
-                    self.state = .loaded(characters: val.results)
-                })
-                .store(in: &cancellable)
+        if useMockData {
+            state = .loaded(characters: People.mockData())
+        } else {
+            let url = nextPageURL ?? currentPageURL
+            
+            if let api {
+                api.getPeople(from: url)
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                        case .finished:
+                            print("finished")
+                        case .failure(_):
+                            self.state = .error
+                        }
+                    }, receiveValue: { [weak self] val in
+                        guard let self else { return }
+                        
+                        self.state = .loaded(characters: val.results)
+                    })
+                    .store(in: &cancellable)
+            }
         }
     }
 }
