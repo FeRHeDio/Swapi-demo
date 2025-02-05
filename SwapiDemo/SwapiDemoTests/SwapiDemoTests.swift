@@ -71,16 +71,25 @@ final class SwapiDemoTests: XCTestCase {
     }
     
     func test_API_returnsBadServerResponse() {
-        let wrongURL = "bad_url"
-        let sut = makeSUT(url: wrongURL)
+        let url = "https://swapi.tech/api/people"
+        let sut = makeSUT(url: url)
         var cancellable = Set<AnyCancellable>()
+        
+        let mockResponse = HTTPURLResponse(
+            url: URL(string: url)!,
+            statusCode: 210,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        URLSessionMock.mockResponse = (nil, mockResponse, nil)
         
         let exp = XCTestExpectation(description: "wait for it")
         
-        sut.getPeople(from: wrongURL)
+        sut.getPeople(from: url)
             .sink { completion in
                 if case .failure(let error) = completion {
-                    XCTAssertEqual(error as? URLError, URLError(.badURL))
+                    XCTAssertEqual(error as? URLError, URLError(.badServerResponse))
                     exp.fulfill()
                 } else {
                     XCTFail("Shouldn't succeed on a bad url!")
@@ -91,46 +100,6 @@ final class SwapiDemoTests: XCTestCase {
 
         wait(for: [exp], timeout: 1.0)
     }
-    
-//    func test_API_returnsBadResponseError() async {
-//        let sut = makeSUT()
-//        let url = "https://swapi.tech/api/people"
-//        
-//        let response = HTTPURLResponse(
-//            url: URL(string: url)!,
-//            statusCode: 300,
-//            httpVersion: nil,
-//            headerFields: nil
-//        )
-//        
-//        URLSessionMock.mockResponse = (nil, response, nil)
-//        
-//        do {
-//            _ = try await sut.getPeople()
-//        } catch {
-//            XCTAssertEqual(error as? URLError, URLError(.badServerResponse))
-//        }
-//    }
-//    
-//    func test_API_returnsBadHTTPResponse() async {
-//        let sut = makeSUT()
-//        let url = "https://swapi.tech/api/people"
-//        
-//        let response = URLResponse(
-//            url: URL(string: url)!,
-//            mimeType: nil,
-//            expectedContentLength: 0,
-//            textEncodingName: nil
-//        )
-//        
-//        URLSessionMock.mockResponse = (nil, response, nil)
-//        
-//        do {
-//            _ = try await sut.getPeople()
-//        } catch {
-//            XCTAssertEqual(error as? URLError, URLError(.badServerResponse))
-//        }
-//    }
     
     // MARK: - Helpers
     
