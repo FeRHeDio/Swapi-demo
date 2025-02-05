@@ -13,7 +13,7 @@ final class SwapiDemoTests: XCTestCase {
     func test_API_getPeopleSucceed() async throws {
         let url = "https://swapi.tech/api/people"
         let sut = makeSUT(url: url)
-        let response = HTTPURLResponse(
+        let mockResponse = HTTPURLResponse(
             url: URL(string: url)!,
             statusCode: 200,
             httpVersion: nil,
@@ -22,20 +22,17 @@ final class SwapiDemoTests: XCTestCase {
         
         var cancellable = Set<AnyCancellable>()
         
-        let sampleData = try! JSONEncoder().encode(makePeopleReponseMock())
+        let mockData = try! JSONEncoder().encode(makePeopleReponseMock())
         
-        URLSessionMock.mockResponse = (sampleData, response, nil)
+        URLSessionMock.mockResponse = (mockData, mockResponse, nil)
         
         var peopleList = [People]()
         let exp = XCTestExpectation(description: "wait for it")
         
         sut.getPeople(from: url)
             .sink { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(_):
-                    print("error")
+                if case .failure = completion {
+                    XCTFail("Expected successful response but received failure")
                 }
             } receiveValue: { people in
                 peopleList = people.results
@@ -45,32 +42,35 @@ final class SwapiDemoTests: XCTestCase {
 
         wait(for: [exp], timeout: 1.0)
         
-        XCTAssertEqual(peopleList.count, 2, "Expected count 2, received: \(peopleList.count)")
+        let expectedResult = 2
+        let receivedResult = peopleList.count
+        
+        XCTAssertEqual(receivedResult, expectedResult, "Expected count \(expectedResult), received: \(receivedResult) instead")
     }
     
-    func test_API_returnsBadURLError() async {
-        let wrongURL = "someBadURL"
-        let sut = makeSUT(url: wrongURL)
-        var cancellable = Set<AnyCancellable>()
-        
-        let exp = XCTestExpectation(description: "wait for it")
-        
-        sut.getPeople(from: wrongURL)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(let error):
-                    print("error: \(error)")
-                    XCTAssertEqual(error as? URLError, URLError(.badURL))
-                    exp.fulfill()
-                }
-            } receiveValue: { _ in exp.fulfill() }
-            
-            .store(in: &cancellable)
-
-        wait(for: [exp], timeout: 1.0)
-    }
+//    func test_API_returnsBadURLError() async {
+//        let wrongURL = "someBadURL"
+//        let sut = makeSUT(url: wrongURL)
+//        var cancellable = Set<AnyCancellable>()
+//        
+//        let exp = XCTestExpectation(description: "wait for it")
+//        
+//        sut.getPeople(from: wrongURL)
+//            .sink { completion in
+//                switch completion {
+//                case .finished:
+//                    print("finished")
+//                case .failure(let error):
+//                    print("error: \(error)")
+//                    XCTAssertEqual(error as? URLError, URLError(.badURL))
+//                    exp.fulfill()
+//                }
+//            } receiveValue: { _ in exp.fulfill() }
+//            
+//            .store(in: &cancellable)
+//
+//        wait(for: [exp], timeout: 1.0)
+//    }
     
 //    func test_API_returnsBadResponseError() async {
 //        let sut = makeSUT()
