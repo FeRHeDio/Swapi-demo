@@ -5,42 +5,40 @@
 //  Created by Fernando Putallaz on 23/12/2024.
 //
 
+import Combine
 import Foundation
 
 class API {
     private var session: URLSession
-    private var baseURL: String
+    private var baseURL: String?
     
     init(
         session: URLSession = .shared,
-        baseURL: String = "https://swapi.tech/api/people"
+        baseURL: String?
     ) {
         self.session = session
         self.baseURL = baseURL
     }
     
-    func getPeople() async throws -> [People] {
-        do {
-            guard let url = URL(string: baseURL), url.scheme != nil, url.host != nil else {
-                throw URLError(.badURL)
-            }
-            
-            let (data, response) = try await session.data(from: url)
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                throw URLError(.badServerResponse )
-            }
-            
-            guard httpResponse.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-            
-            let peopleResponse = try JSONDecoder().decode(PeopleResponse.self, from: data)
-            
-            return peopleResponse.results
-            
-        } catch let error{
-            throw error
+    func getPeople(from url: String) -> AnyPublisher<PeopleResponse, Error> {
+        guard let url = URL(string: url),
+              url.scheme == "http" || url.scheme == "https",
+              url.host != nil else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
+        
+        return session.dataTaskPublisher(for: url)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    
+                    throw URLError(.badServerResponse)
+                }
+                
+                return data
+            }
+            .decode(type: PeopleResponse.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 }

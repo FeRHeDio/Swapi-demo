@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @Observable
 class CharactersViewModel {
@@ -15,6 +16,9 @@ class CharactersViewModel {
         case error
     }
     
+    var nextPageURL: String?
+    var currentPageURL = "https://swapi.tech/api/people"
+    var cancellable = Set<AnyCancellable>()
     var peopleList = [People]()
     let api: API?
     var state = LoadingState.loading
@@ -24,19 +28,30 @@ class CharactersViewModel {
         self.peopleList = peopleList
         self.api = api
         self.useMockData = useMockData
+        getPeople()
     }
     
-    func getData() async {
+    func getPeople() {
         if useMockData {
             state = .loaded(characters: People.mockData())
         } else {
-            state = .loading
-            do {
-                if let api {
-                    state = .loaded(characters: try await api.getPeople())
-                }
-            } catch {
-                state = .error
+            let url = nextPageURL ?? currentPageURL
+            
+            if let api {
+                api.getPeople(from: url)
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                        case .finished:
+                            print("finished")
+                        case .failure(_):
+                            self.state = .error
+                        }
+                    }, receiveValue: { [weak self] val in
+                        guard let self else { return }
+                        
+                        self.state = .loaded(characters: val.results)
+                    })
+                    .store(in: &cancellable)
             }
         }
     }
