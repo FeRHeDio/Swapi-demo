@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            CharactersView(charactersViewModel: charactersViewModel)
+            CharactersListView(charactersViewModel: charactersViewModel)
                 .tabItem {
                     Label(
                         title: { Text("Characters") },

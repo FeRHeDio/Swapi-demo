@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CharactersView: View {
+struct CharactersListView: View {
     let charactersViewModel: CharactersViewModel
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 10)]
     @State private var selectedCharacter: People? = nil
@@ -44,7 +44,7 @@ struct CharactersView: View {
 }
 
 #Preview {
-    CharactersView(
+    CharactersListView(
         charactersViewModel: CharactersViewModel(
             useMockData: true
         )
