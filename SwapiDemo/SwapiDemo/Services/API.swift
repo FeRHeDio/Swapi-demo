@@ -21,9 +21,10 @@ class API {
     }
     
     func getPeople(from url: String) -> AnyPublisher<PeopleResponse, Error> {
-        guard let url = URL(string: url) else {
-            return Fail(error: URLError(.badURL))
-                .eraseToAnyPublisher()
+        guard let url = URL(string: url),
+              url.scheme == "http" || url.scheme == "https",
+              url.host != nil else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         
         return session.dataTaskPublisher(for: url)
