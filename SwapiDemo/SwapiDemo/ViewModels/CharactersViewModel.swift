@@ -16,8 +16,8 @@ class CharactersViewModel {
         case error
     }
     
-    var nextPageURL: String?
-    var currentPageURL = "https://swapi.tech/api/people"
+    private var allCharacters = [People]()
+    var nextPageURL: String? = "https://swapi.tech/api/people"
     var cancellable = Set<AnyCancellable>()
     let api: API?
     var state = LoadingState.loading
@@ -33,7 +33,7 @@ class CharactersViewModel {
         if useMockData {
             state = .loaded(characters: People.mockData())
         } else {
-            let url = nextPageURL ?? currentPageURL
+            guard let url = nextPageURL else { return }
             
             if let api {
                 api.getPeople(from: url)
@@ -44,10 +44,13 @@ class CharactersViewModel {
                         case .failure(_):
                             self.state = .error
                         }
-                    }, receiveValue: { [weak self] val in
+                    }, receiveValue: { [weak self] response in
                         guard let self else { return }
                         
-                        self.state = .loaded(characters: val.results)
+                        self.allCharacters.append(contentsOf: response.results)
+                        
+                        self.state = .loaded(characters: self.allCharacters)
+                        self.nextPageURL = response.next
                     })
                     .store(in: &cancellable)
             }

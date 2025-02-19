@@ -29,6 +29,11 @@ struct CharactersListView: View {
                                         selectedCharacter = chad
                                     }
                                     .padding(.vertical, 8)
+                                    .onAppear {
+                                        if chad.uid == characters.last?.uid {
+                                            charactersViewModel.getPeople()
+                                        }
+                                    }
                             }
                         }
                     }
