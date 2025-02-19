@@ -19,13 +19,11 @@ class CharactersViewModel {
     var nextPageURL: String?
     var currentPageURL = "https://swapi.tech/api/people"
     var cancellable = Set<AnyCancellable>()
-    var peopleList = [People]()
     let api: API?
     var state = LoadingState.loading
     var useMockData: Bool
     
-    init(peopleList: [People] = [People](), api: API? = nil, useMockData: Bool = false) {
-        self.peopleList = peopleList
+    init(api: API? = nil, useMockData: Bool = false) {
         self.api = api
         self.useMockData = useMockData
         getPeople()
