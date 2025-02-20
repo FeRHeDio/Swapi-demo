@@ -18,8 +18,14 @@ struct CharacterView: View {
                 .cornerRadius(20)
                 .frame(width: 180)
             
-            VStack(alignment: .leading) {
+            HStack {
                 Text(character.name)
+                    .font(.caption)
+                    .bold()
+                
+                Spacer()
+                
+                Text(character.id)
                     .font(.caption)
                     .bold()
             }

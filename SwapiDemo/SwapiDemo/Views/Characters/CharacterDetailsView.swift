@@ -12,5 +12,7 @@ struct CharacterDetailsView: View {
     
     var body: some View {
         Text("Hi, my name is: \(character.name)")
+        Text("My id is: \(character.id)")
+        
     }
 }
