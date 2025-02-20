@@ -22,6 +22,7 @@ class CharactersViewModel {
     let api: API?
     var state = LoadingState.loading
     var useMockData: Bool
+    var showProgressView: Bool = false
     
     init(api: API? = nil, useMockData: Bool = false) {
         self.api = api
@@ -36,6 +37,7 @@ class CharactersViewModel {
             guard let url = nextPageURL else { return }
             
             if let api {
+                self.showProgressView = true
                 api.getPeople(from: url)
                     .sink(receiveCompletion: { completion in
                         switch completion {
@@ -48,9 +50,9 @@ class CharactersViewModel {
                         guard let self else { return }
                         
                         self.allCharacters.append(contentsOf: response.results)
-                        
                         self.state = .loaded(characters: self.allCharacters)
                         self.nextPageURL = response.next
+                        self.showProgressView = false
                     })
                     .store(in: &cancellable)
             }

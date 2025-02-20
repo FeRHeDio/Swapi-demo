@@ -10,6 +10,7 @@ import SwiftUI
 struct CharactersListView: View {
     let charactersViewModel: CharactersViewModel
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 10)]
+    
     @State private var selectedCharacter: People? = nil
     
     var body: some View {
@@ -35,6 +36,10 @@ struct CharactersListView: View {
                                         }
                                     }
                             }
+                        }
+                        
+                        if charactersViewModel.showProgressView {
+                            ProgressView()
                         }
                     }
                     .padding(.horizontal, 6)
