@@ -43,6 +43,9 @@ struct CharactersListView: View {
                         }
                     }
                     .padding(.horizontal, 6)
+                    .refreshable {
+                        await charactersViewModel.refreshData()
+                    }
                 }
             }
             .navigationTitle("Characters")

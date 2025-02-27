@@ -42,7 +42,7 @@ class CharactersViewModel {
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .finished:
-                            print("finished")
+                            print("finished loading page \(url)")
                         case .failure(_):
                             self.state = .error
                         }
@@ -57,5 +57,17 @@ class CharactersViewModel {
                     .store(in: &cancellable)
             }
         }
+    }
+    
+    func refreshData() async {
+        await sleepSafelyFor(1.0)
+        cancellable.removeAll()
+        allCharacters.removeAll()
+        nextPageURL = "https://swapi.tech/api/people"
+        getPeople()
+    }
+    
+    func sleepSafelyFor(_ seconds: Double) async {
+        try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
     }
 }
